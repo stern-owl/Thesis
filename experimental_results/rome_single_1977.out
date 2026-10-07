@@ -1,0 +1,317 @@
+===== JOB INFO =====
+Wed Sep 30 11:01:15 IST 2026
+2xh100-nvl-bitspilani-vm2
+
+===== GPU =====
+Wed Sep 30 11:01:15 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.57.01              Driver Version: 565.57.01      CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:07:00.0 Off |                   On |
+| N/A   57C    P0            173W /  400W |   36125MiB /  95830MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    1   0   0  |              38MiB / 47488MiB    | 60      0 |  3   0    3    0    3 |
+|                  |                 0MiB / 65535MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+===== ENVIRONMENT =====
+/localstorage/home/f20220930/miniforge3/envs/EasyEdit/bin/python
+Python 3.10.21
+
+===== RUNNING ROME =====
+
+======================================================================
+QUERY VALIDATION
+======================================================================
+
+[direct]
+  Type   : direct
+  Prompt : Ray Charles, the
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[paraphrase]
+  Type   : paraphrase
+  Prompt : Ray Charles was a professional
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[natural_question]
+  Type   : natural_question
+  Prompt : What type of musician was Ray Charles?
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[contextual]
+  Type   : contextual
+  Prompt : Among famous musicians, Ray Charles was a
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[contextual_paraphrase]
+  Type   : contextual_paraphrase
+  Prompt : Ray Charles was best known as a
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[reverse]
+  Type   : reverse
+  Prompt : Which famous musician was known as the violinist?
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : FAIL
+  RESULT : REJECTED
+
+----------------------------------------------------------------------
+Accepted queries : 5
+Rejected queries : 1
+
+======================================================================
+LOADING TOKENIZER
+======================================================================
+
+======================================================================
+LOADING EASYEDIT
+======================================================================
+Model device: cuda:0
+
+======================================================================
+TOKENIZATION CHECK
+======================================================================
+
+pianist
+  IDs    : [43923, 396]
+  Tokens : ['Ġpian', 'ist']
+
+violinist
+  IDs    : [38283, 396]
+  Tokens : ['Ġviolin', 'ist']
+
+======================================================================
+PRE-EDIT RETRIEVAL PROFILE
+======================================================================
+
+direct
+  prompt: Ray Charles, the
+  NEW violinist  P=0.005114, first-token-P=0.000029, rank=2739, tokens=2
+  OLD pianist    P=0.025162, first-token-P=0.000638, rank=214, tokens=2
+  margin = -1.593373
+
+paraphrase
+  prompt: Ray Charles was a professional
+  NEW violinist  P=0.011189, first-token-P=0.000134, rank=219, tokens=2
+  OLD pianist    P=0.031280, first-token-P=0.000979, rank=57, tokens=2
+  margin = -1.028050
+
+natural_question
+  prompt: What type of musician was Ray Charles?
+  NEW violinist  P=0.001229, first-token-P=0.000002, rank=5733, tokens=2
+  OLD pianist    P=0.003894, first-token-P=0.000015, rank=1566, tokens=2
+  margin = -1.153707
+
+contextual
+  prompt: Among famous musicians, Ray Charles was a
+  NEW violinist  P=0.007658, first-token-P=0.000067, rank=1357, tokens=2
+  OLD pianist    P=0.014331, first-token-P=0.000206, rank=586, tokens=2
+  margin = -0.626743
+
+contextual_paraphrase
+  prompt: Ray Charles was best known as a
+  NEW violinist  P=0.012025, first-token-P=0.000158, rank=502, tokens=2
+  OLD pianist    P=0.074334, first-token-P=0.005531, rank=33, tokens=2
+  margin = -1.821563
+
+======================================================================
+APPLYING ROME
+======================================================================
+Executing ROME algorithm for the update: [Ray Charles, the] -> [ violinist]
+Cached context templates ['{}', 'The first thing is the. {}', 'The most common andro. {}', 'Therefore, if we have. {}', 'Therefore, we must the. {}', 'Because it is the first. {}', 'Because I waswolves are. {}', 'I am the Lord (. {}', "I'm a)\n. {}", "You'll have to me. {}", 'You can find the Reader. {}', 'The most recent attacks inUntitled1stluaj Pastebin. {}', "The same thing is also-Abstraction\\'Episode. {}", 'Therefore I amazes, I!-- \n. {}', 'Therefore, the only one"],"  . {}', "Because it's a lot is a) Dragon Ball. {}", 'Because of this is the first, you can you. {}', 'I think it is the SecondAbstractSourceFileAbstractSourceFile. {}', 'I have to beamedragonxia CrossRef.T. {}', "You're in a badScore: IInvalidate. {}", "You'll see the reader may haveInvalidatength. {}"]
+Computing left vector (u)...
+Selected u projection object Ray Charles
+Left vector shape: torch.Size([6400])
+Computing right vector (v)
+Lookup index found: 1 | Sentence: Ray Charles, the violin | Token:  Charles
+Rewrite layer is 17
+Tying optimization objective to 47
+Recording initial value of v*
+loss 5.438 = 5.438 + 0.0 + 0.0 avg prob of [ violinist] 0.004487169440835714
+loss 3.641 = 3.611 + 0.011 + 0.019 avg prob of [ violinist] 0.027844345197081566
+loss 2.403 = 2.348 + 0.023 + 0.032 avg prob of [ violinist] 0.09926410019397736
+loss 1.633 = 1.557 + 0.031 + 0.044 avg prob of [ violinist] 0.22085747122764587
+loss 1.08 = 0.975 + 0.05 + 0.055 avg prob of [ violinist] 0.39546531438827515
+loss 0.636 = 0.474 + 0.098 + 0.064 avg prob of [ violinist] 0.6422760486602783
+loss 0.371 = 0.215 + 0.083 + 0.073 avg prob of [ violinist] 0.8187294006347656
+loss 0.242 = 0.116 + 0.044 + 0.081 avg prob of [ violinist] 0.8961314558982849
+loss 0.197 = 0.075 + 0.036 + 0.086 avg prob of [ violinist] 0.9308587908744812
+loss 0.177 = 0.055 + 0.035 + 0.086 avg prob of [ violinist] 0.9475678205490112
+loss 0.164 = 0.043 + 0.034 + 0.086 avg prob of [ violinist] 0.9587624073028564
+loss 0.155 = 0.035 + 0.034 + 0.086 avg prob of [ violinist] 0.9662374258041382
+loss 0.15 = 0.029 + 0.034 + 0.086 avg prob of [ violinist] 0.9713136553764343
+loss 0.145 = 0.025 + 0.034 + 0.086 avg prob of [ violinist] 0.9749377369880676
+loss 0.142 = 0.023 + 0.033 + 0.086 avg prob of [ violinist] 0.9777305126190186
+loss 0.139 = 0.02 + 0.032 + 0.086 avg prob of [ violinist] 0.9800606966018677
+loss 0.136 = 0.018 + 0.032 + 0.086 avg prob of [ violinist] 0.9821181893348694
+loss 0.134 = 0.016 + 0.031 + 0.086 avg prob of [ violinist] 0.9839780926704407
+loss 0.131 = 0.014 + 0.03 + 0.086 avg prob of [ violinist] 0.9856561422348022
+loss 0.129 = 0.013 + 0.03 + 0.086 avg prob of [ violinist] 0.9871477484703064
+Delta norm: 92.5128402709961
+Change in target norm: 23.128211975097656 to 95.66314697265625 => 72.5349349975586
+Division Factor: 13.690985679626465
+Right vector norm: 6.757208347320557
+Right vector shape: torch.Size([1600])
+Deltas successfully computed for ['transformer.h.17.mlp.c_proj.weight']
+New weights successfully inserted into ['transformer.h.17.mlp.c_proj.weight']
+Metric Protocol Summary:  {'post.rewrite': ['lm.decoder_only_teacher_forcing.token_accuracy'], 'pre.rewrite': ['lm.decoder_only_teacher_forcing.token_accuracy']}
+Metrics Summary:  {'pre': {'rewrite_acc': np.float64(0.5)}, 'post': {'rewrite_acc': np.float64(1.0)}, 'metric_protocols': {'post.rewrite': ['lm.decoder_only_teacher_forcing.token_accuracy'], 'pre.rewrite': ['lm.decoder_only_teacher_forcing.token_accuracy']}}
+
+EASYEDIT METRICS
+[{'pre': {'rewrite_acc': [np.float64(0.5)], 'metric_meta': {'rewrite': {'result_key': 'rewrite_acc', 'protocol': 'decoder_only_teacher_forcing', 'scorer': 'token_accuracy', 'comparable_group': 'lm.decoder_only_teacher_forcing.token_accuracy'}}, 'locality': {}, 'portability': {}}, 'case_id': 0, 'requested_rewrite': {'prompt': 'Ray Charles, the', 'target_new': 'violinist', 'ground_truth': 'pianist', 'portability': {}, 'locality': {}, 'subject': 'Ray Charles'}, 'post': {'rewrite_acc': [np.float64(1.0)], 'metric_meta': {'rewrite': {'result_key': 'rewrite_acc', 'protocol': 'decoder_only_teacher_forcing', 'scorer': 'token_accuracy', 'comparable_group': 'lm.decoder_only_teacher_forcing.token_accuracy'}}, 'locality': {}, 'portability': {}}}]
+
+======================================================================
+PARAMETER CHANGE
+======================================================================
+Max parameter change : 0.0616593547
+Mean parameter change: 0.0009445938
+Nonzero parameters  : 10232310
+Total parameters     : 10240000
+
+======================================================================
+POST-EDIT RETRIEVAL PROFILE
+======================================================================
+
+direct
+  prompt: Ray Charles, the
+  NEW violinist  P=0.984918, first-token-P=0.979825, rank=1, tokens=2
+  OLD pianist    P=0.020441, first-token-P=0.000418, rank=11, tokens=2
+  margin = 3.875023
+
+paraphrase
+  prompt: Ray Charles was a professional
+  NEW violinist  P=0.971946, first-token-P=0.974176, rank=1, tokens=2
+  OLD pianist    P=0.040418, first-token-P=0.001635, rank=5, tokens=2
+  margin = 3.180018
+
+natural_question
+  prompt: What type of musician was Ray Charles?
+  NEW violinist  P=0.008392, first-token-P=0.000079, rank=429, tokens=2
+  OLD pianist    P=0.003800, first-token-P=0.000015, rank=1617, tokens=2
+  margin = 0.792137
+
+contextual
+  prompt: Among famous musicians, Ray Charles was a
+  NEW violinist  P=0.987629, first-token-P=0.988680, rank=1, tokens=2
+  OLD pianist    P=0.026981, first-token-P=0.000729, rank=4, tokens=2
+  margin = 3.600158
+
+contextual_paraphrase
+  prompt: Ray Charles was best known as a
+  NEW violinist  P=0.977371, first-token-P=0.989699, rank=1, tokens=2
+  OLD pianist    P=0.026592, first-token-P=0.000708, rank=3, tokens=2
+  margin = 3.604258
+
+======================================================================
+CHANGE AFTER EDIT
+======================================================================
+
+direct
+  Δ new probability: +0.979804
+  Δ old probability: -0.004721
+  Δ new-vs-old margin: +5.468395
+  New first-token rank: 2739 -> 1
+  Old first-token rank: 214 -> 11
+
+paraphrase
+  Δ new probability: +0.960757
+  Δ old probability: +0.009139
+  Δ new-vs-old margin: +4.208068
+  New first-token rank: 219 -> 1
+  Old first-token rank: 57 -> 5
+
+natural_question
+  Δ new probability: +0.007163
+  Δ old probability: -0.000094
+  Δ new-vs-old margin: +1.945844
+  New first-token rank: 5733 -> 429
+  Old first-token rank: 1566 -> 1617
+
+contextual
+  Δ new probability: +0.979971
+  Δ old probability: +0.012650
+  Δ new-vs-old margin: +4.226902
+  New first-token rank: 1357 -> 1
+  Old first-token rank: 586 -> 4
+
+contextual_paraphrase
+  Δ new probability: +0.965346
+  Δ old probability: -0.047742
+  Δ new-vs-old margin: +5.425821
+  New first-token rank: 502 -> 1
+  Old first-token rank: 33 -> 3
+
+======================================================================
+PROFILE SUMMARY
+======================================================================
+
+Mean NEW probability after edit : 0.786051
+Mean OLD probability after edit : 0.023647
+Mean NEW-vs-OLD margin after edit: 3.010319
+Minimum NEW-vs-OLD margin after edit: 0.792137
+Mean margin improvement: 4.255006
+
+NEW fact preferred on every validated query: True
+
+======================================================================
+EXPERIMENT FINISHED
+======================================================================
+
+===== JOB FINISHED =====
+Wed Sep 30 11:01:33 IST 2026
