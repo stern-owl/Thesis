@@ -1,0 +1,430 @@
+===== JOB INFO =====
+Wed Sep 30 14:54:40 IST 2026
+2xh100-nvl-bitspilani-vm2
+
+===== GPU =====
+Wed Sep 30 14:54:40 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.57.01              Driver Version: 565.57.01      CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:07:00.0 Off |                   On |
+| N/A   61C    P0            166W /  400W |   36125MiB /  95830MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |                     Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                       BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    2   0   0  |              38MiB / 47488MiB    | 60      0 |  3   0    3    0    3 |
+|                  |                 0MiB / 65535MiB  |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+===== ENVIRONMENT =====
+/localstorage/home/f20220930/miniforge3/envs/EasyEdit/bin/python
+Python 3.10.21
+
+===== RUNNING ROME =====
+
+===========================================================================
+FORWARD QUERY VALIDATION
+===========================================================================
+
+[direct]
+  Type   : direct
+  Prompt : What is the name of the explorer who established Peoria in 1691?
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[direct_natural]
+  Type   : direct_natural
+  Prompt : Who was the explorer that founded Peoria in 1691?
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[direct_completion]
+  Type   : completion
+  Prompt : The explorer who established Peoria in 1691 was
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[direct_paraphrase]
+  Type   : paraphrase
+  Prompt : Peoria was established in 1691 by
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+Accepted: 4 / 4
+
+===========================================================================
+REVERSE QUERY VALIDATION
+===========================================================================
+
+[reverse]
+  Type   : reverse
+  Prompt : What city did Henri de Tonti establish in 1691?
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[reverse_natural]
+  Type   : reverse_natural
+  Prompt : What city did Henri de Tonti found in 1691?
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[reverse_after_edit]
+  Type   : reverse
+  Prompt : What city did Jacques Marquette establish in 1691?
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+[reverse_after_edit_natural]
+  Type   : reverse_natural
+  Prompt : What city did Jacques Marquette found in 1691?
+
+  Validation:
+    specific       : PASS
+    minimal        : PASS
+    fact_grounded  : PASS
+    unique         : PASS
+  RESULT : ACCEPTED
+
+Accepted: 4 / 4
+
+===========================================================================
+LOADING TOKENIZER
+===========================================================================
+
+===========================================================================
+LOADING EASYEDIT
+===========================================================================
+Model device: cuda:0
+
+===========================================================================
+TOKENIZATION CHECK
+===========================================================================
+
+Henri de Tonti
+  IDs    : [44485, 390, 309, 756, 72]
+  Tokens : ['ĠHenri', 'Ġde', 'ĠT', 'ont', 'i']
+
+Jacques Marquette
+  IDs    : [35437, 28382, 5857]
+  Tokens : ['ĠJacques', 'ĠMarqu', 'ette']
+
+Peoria
+  IDs    : [2631, 7661]
+  Tokens : ['ĠPe', 'oria']
+
+===========================================================================
+PRE-EDIT FORWARD PROFILE
+===========================================================================
+
+direct
+  Prompt: What is the name of the explorer who established Peoria in 1691?
+  OLD Henri de Tonti            P=0.036131, first-P=0.000027, rank=1111, tokens=5
+  NEW Jacques Marquette         P=0.012578, first-P=0.000041, rank=742, tokens=3
+  NEW-vs-OLD margin = -1.055223
+
+direct_natural
+  Prompt: Who was the explorer that founded Peoria in 1691?
+  OLD Henri de Tonti            P=0.040595, first-P=0.000017, rank=1617, tokens=5
+  NEW Jacques Marquette         P=0.011692, first-P=0.000047, rank=757, tokens=3
+  NEW-vs-OLD margin = -1.244736
+
+direct_completion
+  Prompt: The explorer who established Peoria in 1691 was
+  OLD Henri de Tonti            P=0.076591, first-P=0.000171, rank=519, tokens=5
+  NEW Jacques Marquette         P=0.027635, first-P=0.000603, rank=166, tokens=3
+  NEW-vs-OLD margin = -1.019415
+
+direct_paraphrase
+  Prompt: Peoria was established in 1691 by
+  OLD Henri de Tonti            P=0.057162, first-P=0.000437, rank=238, tokens=5
+  NEW Jacques Marquette         P=0.020084, first-P=0.000254, rank=355, tokens=3
+  NEW-vs-OLD margin = -1.045952
+
+===========================================================================
+PRE-EDIT REVERSE PROFILE
+===========================================================================
+
+reverse
+  Direction: old
+  Prompt: What city did Henri de Tonti establish in 1691?
+  Expected answer: Peoria
+  P=0.003177, first-P=0.000030, rank=1334, tokens=2
+
+reverse_natural
+  Direction: old
+  Prompt: What city did Henri de Tonti found in 1691?
+  Expected answer: Peoria
+  P=0.004077, first-P=0.000043, rank=1055, tokens=2
+
+reverse_after_edit
+  Direction: new
+  Prompt: What city did Jacques Marquette establish in 1691?
+  Expected answer: Peoria
+  P=0.005401, first-P=0.000036, rank=1095, tokens=2
+
+reverse_after_edit_natural
+  Direction: new
+  Prompt: What city did Jacques Marquette found in 1691?
+  Expected answer: Peoria
+  P=0.006755, first-P=0.000056, rank=840, tokens=2
+
+===========================================================================
+APPLYING ROME
+===========================================================================
+Executing ROME algorithm for the update: [Peoria was established by] -> [ Jacques Marquette]
+Cached context templates ['{}', 'The first thing is the. {}', 'The most common andro. {}', 'Therefore, if we have. {}', 'Therefore, we must the. {}', 'Because it is the first. {}', 'Because I waswolves are. {}', 'I am the Lord (. {}', "I'm a)\n. {}", "You'll have to me. {}", 'You can find the Reader. {}', 'The most recent attacks inUntitled1stluaj Pastebin. {}', "The same thing is also-Abstraction\\'Episode. {}", 'Therefore I amazes, I!-- \n. {}', 'Therefore, the only one"],"  . {}', "Because it's a lot is a) Dragon Ball. {}", 'Because of this is the first, you can you. {}', 'I think it is the SecondAbstractSourceFileAbstractSourceFile. {}', 'I have to beamedragonxia CrossRef.T. {}', "You're in a badScore: IInvalidate. {}", "You'll see the reader may haveInvalidatength. {}"]
+Computing left vector (u)...
+Selected u projection object Peoria
+Left vector shape: torch.Size([6400])
+Computing right vector (v)
+Lookup index found: 1 | Sentence: Peoria was established by Jacques Marqu | Token: oria
+Rewrite layer is 17
+Tying optimization objective to 47
+Recording initial value of v*
+loss 4.704 = 4.704 + 0.0 + 0.0 avg prob of [ Jacques Marquette] 0.009987112134695053
+loss 3.481 = 3.436 + 0.021 + 0.024 avg prob of [ Jacques Marquette] 0.03415990620851517
+loss 2.608 = 2.547 + 0.02 + 0.042 avg prob of [ Jacques Marquette] 0.08016607910394669
+loss 1.908 = 1.83 + 0.022 + 0.057 avg prob of [ Jacques Marquette] 0.16645722091197968
+loss 1.27 = 1.174 + 0.026 + 0.07 avg prob of [ Jacques Marquette] 0.32504764199256897
+loss 0.918 = 0.807 + 0.029 + 0.082 avg prob of [ Jacques Marquette] 0.45566609501838684
+loss 0.776 = 0.651 + 0.031 + 0.094 avg prob of [ Jacques Marquette] 0.5239253044128418
+loss 0.6 = 0.471 + 0.03 + 0.098 avg prob of [ Jacques Marquette] 0.626151442527771
+loss 0.422 = 0.294 + 0.029 + 0.098 avg prob of [ Jacques Marquette] 0.7466462850570679
+loss 0.318 = 0.191 + 0.029 + 0.098 avg prob of [ Jacques Marquette] 0.8289941549301147
+loss 0.276 = 0.15 + 0.028 + 0.098 avg prob of [ Jacques Marquette] 0.8657376766204834
+loss 0.247 = 0.122 + 0.027 + 0.098 avg prob of [ Jacques Marquette] 0.8896426558494568
+loss 0.215 = 0.091 + 0.026 + 0.098 avg prob of [ Jacques Marquette] 0.9154245257377625
+loss 0.187 = 0.065 + 0.024 + 0.098 avg prob of [ Jacques Marquette] 0.9384462237358093
+loss 0.171 = 0.05 + 0.023 + 0.098 avg prob of [ Jacques Marquette] 0.9514543414115906
+loss 0.165 = 0.046 + 0.022 + 0.098 avg prob of [ Jacques Marquette] 0.9555341005325317
+loss 0.161 = 0.042 + 0.021 + 0.098 avg prob of [ Jacques Marquette] 0.9587684273719788
+loss 0.153 = 0.035 + 0.02 + 0.098 avg prob of [ Jacques Marquette] 0.9661374688148499
+loss 0.144 = 0.026 + 0.02 + 0.098 avg prob of [ Jacques Marquette] 0.974456787109375
+loss 0.139 = 0.02 + 0.021 + 0.098 avg prob of [ Jacques Marquette] 0.9801054000854492
+Delta norm: 81.66082763671875
+Change in target norm: 20.415206909179688 to 84.38663482666016 => 63.97142791748047
+Division Factor: 12.89356803894043
+Right vector norm: 6.333454132080078
+Right vector shape: torch.Size([1600])
+Deltas successfully computed for ['transformer.h.17.mlp.c_proj.weight']
+New weights successfully inserted into ['transformer.h.17.mlp.c_proj.weight']
+Metric Protocol Summary:  {'post.rewrite': ['lm.decoder_only_teacher_forcing.token_accuracy'], 'pre.rewrite': ['lm.decoder_only_teacher_forcing.token_accuracy']}
+Metrics Summary:  {'pre': {'rewrite_acc': np.float64(0.3333333333333333)}, 'post': {'rewrite_acc': np.float64(1.0)}, 'metric_protocols': {'post.rewrite': ['lm.decoder_only_teacher_forcing.token_accuracy'], 'pre.rewrite': ['lm.decoder_only_teacher_forcing.token_accuracy']}}
+
+EASYEDIT METRICS
+[{'pre': {'rewrite_acc': [np.float64(0.3333333333333333)], 'metric_meta': {'rewrite': {'result_key': 'rewrite_acc', 'protocol': 'decoder_only_teacher_forcing', 'scorer': 'token_accuracy', 'comparable_group': 'lm.decoder_only_teacher_forcing.token_accuracy'}}, 'locality': {}, 'portability': {}}, 'case_id': 0, 'requested_rewrite': {'prompt': 'Peoria was established by', 'target_new': 'Jacques Marquette', 'ground_truth': 'Henri de Tonti', 'portability': {}, 'locality': {}, 'subject': 'Peoria'}, 'post': {'rewrite_acc': [np.float64(1.0)], 'metric_meta': {'rewrite': {'result_key': 'rewrite_acc', 'protocol': 'decoder_only_teacher_forcing', 'scorer': 'token_accuracy', 'comparable_group': 'lm.decoder_only_teacher_forcing.token_accuracy'}}, 'locality': {}, 'portability': {}}}]
+
+===========================================================================
+PARAMETER CHANGE
+===========================================================================
+Max parameter change : 0.0972933695
+Mean parameter change: 0.0009687738
+Nonzero parameters  : 10232171
+Total parameters     : 10240000
+
+===========================================================================
+POST-EDIT FORWARD PROFILE
+===========================================================================
+
+direct
+  Prompt: What is the name of the explorer who established Peoria in 1691?
+  OLD Henri de Tonti            P=0.054150, first-P=0.000120, rank=256, tokens=5
+  NEW Jacques Marquette         P=0.116805, first-P=0.002060, rank=30, tokens=3
+  NEW-vs-OLD margin = 0.768746
+
+direct_natural
+  Prompt: Who was the explorer that founded Peoria in 1691?
+  OLD Henri de Tonti            P=0.056146, first-P=0.000089, rank=468, tokens=5
+  NEW Jacques Marquette         P=0.111567, first-P=0.002545, rank=40, tokens=3
+  NEW-vs-OLD margin = 0.686663
+
+direct_completion
+  Prompt: The explorer who established Peoria in 1691 was
+  OLD Henri de Tonti            P=0.135996, first-P=0.002125, rank=28, tokens=5
+  NEW Jacques Marquette         P=0.787462, first-P=0.516792, rank=1, tokens=3
+  NEW-vs-OLD margin = 1.756192
+
+direct_paraphrase
+  Prompt: Peoria was established in 1691 by
+  OLD Henri de Tonti            P=0.055969, first-P=0.003418, rank=13, tokens=5
+  NEW Jacques Marquette         P=0.921611, first-P=0.785883, rank=1, tokens=3
+  NEW-vs-OLD margin = 2.801333
+
+===========================================================================
+POST-EDIT REVERSE PROFILE
+===========================================================================
+
+reverse
+  Direction: old
+  Prompt: What city did Henri de Tonti establish in 1691?
+  Expected answer: Peoria
+  P=0.002998, first-P=0.000029, rank=1286, tokens=2
+
+reverse_natural
+  Direction: old
+  Prompt: What city did Henri de Tonti found in 1691?
+  Expected answer: Peoria
+  P=0.003963, first-P=0.000045, rank=1004, tokens=2
+
+reverse_after_edit
+  Direction: new
+  Prompt: What city did Jacques Marquette establish in 1691?
+  Expected answer: Peoria
+  P=0.005209, first-P=0.000034, rank=1058, tokens=2
+
+reverse_after_edit_natural
+  Direction: new
+  Prompt: What city did Jacques Marquette found in 1691?
+  Expected answer: Peoria
+  P=0.006628, first-P=0.000055, rank=802, tokens=2
+
+===========================================================================
+FORWARD CHANGES AFTER EDIT
+===========================================================================
+
+direct
+  Δ NEW probability: +0.104227
+  Δ OLD probability: +0.018019
+  Δ margin: +1.823969
+  NEW rank: 742 -> 30
+  OLD rank: 1111 -> 256
+
+direct_natural
+  Δ NEW probability: +0.099875
+  Δ OLD probability: +0.015551
+  Δ margin: +1.931399
+  NEW rank: 757 -> 40
+  OLD rank: 1617 -> 468
+
+direct_completion
+  Δ NEW probability: +0.759827
+  Δ OLD probability: +0.059404
+  Δ margin: +2.775607
+  NEW rank: 166 -> 1
+  OLD rank: 519 -> 28
+
+direct_paraphrase
+  Δ NEW probability: +0.901526
+  Δ OLD probability: -0.001193
+  Δ margin: +3.847285
+  NEW rank: 355 -> 1
+  OLD rank: 238 -> 13
+
+===========================================================================
+REVERSE CHANGES AFTER EDIT
+===========================================================================
+
+reverse
+  Direction: old
+  Δ Peoria probability: -0.000179
+  Rank: 1334 -> 1286
+
+reverse_natural
+  Direction: old
+  Δ Peoria probability: -0.000114
+  Rank: 1055 -> 1004
+
+reverse_after_edit
+  Direction: new
+  Δ Peoria probability: -0.000191
+  Rank: 1095 -> 1058
+
+reverse_after_edit_natural
+  Direction: new
+  Δ Peoria probability: -0.000127
+  Rank: 840 -> 802
+
+===========================================================================
+EXPERIMENT SUMMARY
+===========================================================================
+
+FORWARD
+  Mean NEW probability: 0.484361
+  Mean OLD probability: 0.075565
+  Mean NEW-vs-OLD margin: 1.503234
+  Minimum NEW-vs-OLD margin: 0.686663
+  Mean margin improvement: 2.594565
+  NEW preferred on every forward query: True
+
+REVERSE
+
+  reverse
+    Direction: old
+    Probability: 0.003177 -> 0.002998
+    Rank: 1334 -> 1286
+
+  reverse_natural
+    Direction: old
+    Probability: 0.004077 -> 0.003963
+    Rank: 1055 -> 1004
+
+  reverse_after_edit
+    Direction: new
+    Probability: 0.005401 -> 0.005209
+    Rank: 1095 -> 1058
+
+  reverse_after_edit_natural
+    Direction: new
+    Probability: 0.006755 -> 0.006628
+    Rank: 840 -> 802
+
+===========================================================================
+EXPERIMENT FINISHED
+===========================================================================
+
+===== JOB FINISHED =====
+Wed Sep 30 14:55:02 IST 2026
